@@ -1,0 +1,63 @@
+<div class="container">
+  <h1>Лабораторная работа №4. Аппроксимация функции</h1>
+
+  <div class="controls">
+    <div class="input-group" style="width: 100%;">
+      <label>Введите координаты точек (X и Y через пробел или Tab, каждая точка с новой строки):</label>
+      <textarea rows="8" [(ngModel)]="rawInput" (ngModelChange)="clearResults()" 
+                placeholder="0.0  0.0&#10;0.2  2.39&#10;0.4  4.46..."></textarea>
+    </div>
+  </div>
+
+  <div class="action-buttons">
+    <button class="solve-btn secondary-btn" (click)="loadVariant1()">Загрузить Вар 1</button>
+    <button class="solve-btn" (click)="calculate()">Вычислить МНК</button>
+    <button class="solve-btn export-btn" (click)="exportResultsToFile()" [disabled]="!results.length">Сохранить в файл</button>
+  </div>
+  <div class="error-box" *ngIf="errorMessage">{{ errorMessage }}</div>
+  <div class="log-box" *ngIf="logMessage">{{ logMessage }}</div>
+
+  <div class="results" *ngIf="bestResult">
+    <div class="stat-item">
+      <strong>Наилучшее приближение:</strong> <span class="equals">{{ bestResult.name }}</span>
+    </div>
+    <div class="vector-display">
+      <div class="vector-item">Уравнение: <span class="equals">{{ bestResult.equation }}</span></div>
+      <div class="vector-item">Мера откл. (S): <span class="equals">{{ bestResult.S | number:'1.2-5' }}</span></div>
+      <div class="vector-item">СКО: <span class="equals">{{ bestResult.rmse | number:'1.2-5' }}</span></div>
+      <div class="vector-item">R²: <span class="equals">{{ bestResult.r2 | number:'1.2-4' }}</span></div>
+    </div>
+    <div class="stat-item" style="margin-top: 10px;">
+      <em>{{ bestResult.r2Message }}</em>
+    </div>
+  </div>
+
+  <div class="table-container" *ngIf="results.length > 0">
+    <table class="iteration-table">
+      <thead>
+        <tr>
+          <th>Функция</th>
+          <th>Уравнение</th>
+          <th>S (мера откл.)</th>
+          <th>СКО</th>
+          <th>R² (Достоверность)</th>
+          <th>Пирсон (r)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let res of results" [ngClass]="{'best-row': res === bestResult}">
+          <td>{{ res.name }}</td>
+          <td>{{ res.equation }}</td>
+          <td>{{ res.S | number:'1.2-5' }}</td>
+          <td>{{ res.rmse | number:'1.2-5' }}</td>
+          <td>{{ res.r2 | number:'1.2-4' }}</td>
+          <td>{{ res.pearson ? (res.pearson | number:'1.2-4') : '-' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="chart-container" [style.display]="results.length ? 'block' : 'none'">
+    <canvas #chartCanvas></canvas>
+  </div>
+</div>
