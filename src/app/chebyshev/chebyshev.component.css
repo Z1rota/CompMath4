@@ -1,0 +1,156 @@
+.chebyshev {
+  max-width: 900px;
+  margin: 0 auto;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+h2,
+h3 {
+  color: #2c3e50;
+  text-align: center;
+}
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  background: #f8f9fa;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-weight: 700;
+  font-size: 0.9em;
+}
+
+input {
+  width: 92px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font: inherit;
+}
+
+.system-grid {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 28px;
+  margin-bottom: 20px;
+  overflow-x: auto;
+}
+
+.matrix-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.vector-block {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin: 20px 0;
+}
+
+.solve-btn {
+  display: block;
+  width: 220px;
+  padding: 12px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.solve-btn:hover {
+  background-color: #0056b3;
+}
+
+.secondary-btn {
+  background-color: #28a745;
+}
+
+.secondary-btn:hover {
+  background-color: #218838;
+}
+
+.error-box,
+.log-box,
+.results {
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.error-box {
+  color: #721c24;
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+}
+
+.log-box {
+  color: #856404;
+  background-color: #fff3cd;
+  border: 1px solid #ffeeba;
+}
+
+.results {
+  color: #155724;
+  background: #d4edda;
+  border: 1px solid #c3e6cb;
+}
+
+.solution-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 8px;
+  font-weight: 700;
+}
+
+.table-container {
+  overflow-x: auto;
+  margin-bottom: 20px;
+}
+
+.iteration-table {
+  border-collapse: collapse;
+  width: 100%;
+  background-color: white;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.iteration-table th,
+.iteration-table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: center;
+}
+
+.iteration-table th {
+  background-color: #f2f2f2;
+}
+
+@media (max-width: 720px) {
+  .system-grid,
+  .action-buttons {
+    justify-content: flex-start;
+  }
+}

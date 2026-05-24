@@ -1,6 +1,14 @@
 <div class="container">
   <h1>Лабораторная работа №4. Аппроксимация функции</h1>
 
+  <div class="mode-buttons">
+    <button class="solve-btn" [class.secondary-btn]="currentMode === 'approximation'" (click)="currentMode = 'approximation'">Аппроксимация</button>
+    <button class="solve-btn" [class.secondary-btn]="currentMode === 'slae'" (click)="currentMode = 'slae'">Решение СЛАУ</button>
+  </div>
+
+  <app-chebyshev *ngIf="currentMode === 'slae'"></app-chebyshev>
+
+  <ng-container *ngIf="currentMode === 'approximation'">
   <div class="controls">
     <div class="input-group" style="width: 100%;">
       <label>Введите координаты точек (X и Y через пробел, каждая точка с новой строки):</label>
@@ -60,4 +68,5 @@
   <div class="chart-container" [style.display]="results.length ? 'block' : 'none'">
     <canvas #chartCanvas></canvas>
   </div>
+  </ng-container>
 </div>

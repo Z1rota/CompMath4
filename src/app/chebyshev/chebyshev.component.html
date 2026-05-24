@@ -1,0 +1,78 @@
+<section class="chebyshev">
+  <h2>Решение СЛАУ методом Чебышева</h2>
+
+  <div class="controls">
+    <label>
+      Размер
+      <input type="number" min="2" max="6" [(ngModel)]="size" (change)="onSizeChange()">
+    </label>
+    <label>
+      Точность
+      <input type="number" step="0.0001" min="0.000001" [(ngModel)]="epsilon" (ngModelChange)="clearResult()">
+    </label>
+    <label>
+      Итерации
+      <input type="number" min="1" [(ngModel)]="maxIterations" (ngModelChange)="clearResult()">
+    </label>
+  </div>
+
+  <div class="system-grid">
+    <div class="matrix-block">
+      <h3>Матрица A</h3>
+      <div class="matrix-row" *ngFor="let row of matrix; let i = index; trackBy: trackByIndex">
+        <input
+          *ngFor="let value of row; let j = index; trackBy: trackByIndex"
+          type="number"
+          [(ngModel)]="matrix[i][j]"
+          (ngModelChange)="clearResult()"
+        >
+      </div>
+    </div>
+
+    <div class="vector-block">
+      <h3>Вектор b</h3>
+      <input
+        *ngFor="let value of vector; let i = index; trackBy: trackByIndex"
+        type="number"
+        [(ngModel)]="vector[i]"
+        (ngModelChange)="clearResult()"
+      >
+    </div>
+  </div>
+
+  <div class="action-buttons">
+    <button class="solve-btn secondary-btn" type="button" (click)="fillRandom()">Заполнить случайно</button>
+    <button class="solve-btn" type="button" (click)="solve()">Решить СЛАУ</button>
+  </div>
+
+  <div class="error-box" *ngIf="errorMessage">{{ errorMessage }}</div>
+  <div class="log-box" *ngIf="infoMessage">{{ infoMessage }}</div>
+
+  <div class="results" *ngIf="solution.length">
+    <strong>Решение:</strong>
+    <div class="solution-list">
+      <span *ngFor="let value of solution; let i = index">x{{ i + 1 }} = {{ value | number:'1.2-6' }}</span>
+    </div>
+  </div>
+
+  <div class="table-container" *ngIf="iterations.length">
+    <table class="iteration-table">
+      <thead>
+        <tr>
+          <th>k</th>
+          <th>tau</th>
+          <th>||r||</th>
+          <th>x</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let row of iterations">
+          <td>{{ row.index }}</td>
+          <td>{{ row.tau | number:'1.4-5' }}</td>
+          <td>{{ row.residualNorm | number:'1.4-8' }}</td>
+          <td>{{ row.x.join('; ') }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>

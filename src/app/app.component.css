@@ -118,6 +118,13 @@ textarea {
   margin-bottom: 20px;
 }
 
+.mode-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin: 20px 0;
+}
+
 .action-buttons .solve-btn {
   margin: 0; 
 }

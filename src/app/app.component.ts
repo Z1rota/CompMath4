@@ -3,17 +3,20 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';   
 import { Chart, registerables } from 'chart.js';
 import { LeastSquaresMath, Point, ApproximationResult } from './math.component';
+import { ChebyshevComponent } from './chebyshev/chebyshev.component';
 
 Chart.register(...registerables);
 
 @Component({
   selector: 'app-root',
   standalone: true, 
-  imports: [CommonModule, FormsModule], 
+  imports: [CommonModule, FormsModule, ChebyshevComponent], 
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  currentMode: 'approximation' | 'slae' = 'approximation';
+
   rawInput: string = '';
   errorMessage: string = '';
   logMessage: string = '';
